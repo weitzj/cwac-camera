@@ -16,7 +16,7 @@ package com.commonsware.cwac.camera;
 
 import android.hardware.Camera;
 
-public class PictureTransaction implements Camera.ShutterCallback {
+public class PictureTransaction implements Camera.PreviewCallback, Camera.ShutterCallback {
   CameraHost host=null;
   boolean needBitmap=false;
   boolean needByteArray=true;
@@ -83,6 +83,15 @@ public class PictureTransaction implements Camera.ShutterCallback {
     this.displayOrientation=displayOrientation;
 
     return(this);
+  }
+
+  @Override
+  public void onPreviewFrame(byte[] bytes, Camera camera) {
+    Camera.PreviewCallback cb=host.getPreviewCallback();
+
+    if (cb != null) {
+      cb.onPreviewFrame(bytes, camera);
+    }
   }
 
   @Override

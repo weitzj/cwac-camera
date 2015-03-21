@@ -207,6 +207,13 @@ public interface CameraHost extends Camera.AutoFocusCallback {
                                               Camera.Size deviceHint);
 
   /**
+   * @return the Camera.PreviewCallback to be used with the
+   *         camera, whether a PreviewFrame is available
+   */
+  Camera.PreviewCallback getPreviewCallback();
+
+
+  /**
    * @return the Camera.ShutterCallback to be used with the
    *         camera, for sound effects and such
    */

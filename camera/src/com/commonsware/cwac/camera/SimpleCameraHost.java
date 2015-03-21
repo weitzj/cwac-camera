@@ -156,8 +156,8 @@ public class SimpleCameraHost implements CameraHost {
                                     int height,
                                     Camera.Parameters parameters) {
     return(CameraUtils.getBestAspectPreviewSize(displayOrientation,
-                                                width, height,
-                                                parameters));
+            width, height,
+            parameters));
   }
 
   @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -175,6 +175,11 @@ public class SimpleCameraHost implements CameraHost {
       return(parameters.getPreferredPreviewSizeForVideo());
     }
 
+    return(null);
+  }
+
+  @Override
+  public Camera.PreviewCallback getPreviewCallback() {
     return(null);
   }
 
