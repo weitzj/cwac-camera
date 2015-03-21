@@ -23,6 +23,7 @@ import android.graphics.ImageFormat;
 import android.hardware.Camera;
 import android.hardware.Camera.AutoFocusCallback;
 import android.hardware.Camera.CameraInfo;
+import android.hardware.Camera.PreviewCallback;
 import android.media.MediaRecorder;
 import android.os.Build;
 import android.util.AttributeSet;
@@ -35,7 +36,7 @@ import android.view.ViewGroup;
 import java.io.IOException;
 import com.commonsware.cwac.camera.CameraHost.FailureReason;
 
-public class CameraView extends ViewGroup implements AutoFocusCallback {
+public class CameraView extends ViewGroup implements AutoFocusCallback, PreviewCallback {
   static final String TAG="CWAC-Camera";
   private PreviewStrategy previewStrategy;
   private Camera.Size previewSize;
@@ -531,7 +532,12 @@ public class CameraView extends ViewGroup implements AutoFocusCallback {
   }
 
   private void startPreview() {
+    camera.setOneShotPreviewCallback(this);
     camera.startPreview();
+  }
+
+  @Override
+  public void onPreviewFrame(byte[] bytes, Camera camera) {
     inPreview=true;
     getHost().autoFocusAvailable();
   }
