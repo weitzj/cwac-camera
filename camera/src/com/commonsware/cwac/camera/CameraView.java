@@ -534,11 +534,11 @@ public class CameraView extends ViewGroup implements AutoFocusCallback, PreviewC
   private void startPreview() {
     camera.setOneShotPreviewCallback(this);
     camera.startPreview();
+    inPreview=true;
   }
 
   @Override
   public void onPreviewFrame(byte[] bytes, Camera camera) {
-    inPreview=true;
     getHost().autoFocusAvailable();
   }
 
